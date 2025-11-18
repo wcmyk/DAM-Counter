@@ -10,12 +10,14 @@ document.getElementById("fileInput").addEventListener("change", async (e) => {
     return;
   }
 
-  // Find TargetFilename column
+  // Find Targetfilename column (safe, case-insensitive)
   const header = rows[0];
-  const colIndex = header.indexOf("Targetfilename");
+  const colIndex = header.findIndex(
+    h => typeof h === "string" && h.trim().toLowerCase() === "targetfilename"
+  );
 
   if (colIndex === -1) {
-    alert("Column 'TargetFilename' not found.");
+    alert("Column 'Targetfilename' not found.");
     return;
   }
 
@@ -27,7 +29,7 @@ document.getElementById("fileInput").addEventListener("change", async (e) => {
     if (filename) counts[filename] = (counts[filename] || 0) + 1;
   }
 
-  // Display results
+  // Display results in table
   const tbody = document.querySelector("#resultTable tbody");
   tbody.innerHTML = "";
 
@@ -37,7 +39,7 @@ document.getElementById("fileInput").addEventListener("change", async (e) => {
     tbody.appendChild(tr);
   }
 
-  // Export CSV button
+  // Enable export button
   const exportBtn = document.getElementById("exportBtn");
   exportBtn.disabled = false;
   exportBtn.onclick = () => downloadCSV(counts);
