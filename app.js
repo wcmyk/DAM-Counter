@@ -12,7 +12,7 @@ document.getElementById("fileInput").addEventListener("change", async (e) => {
 
   // Find TargetFilename column
   const header = rows[0];
-  const colIndex = header.indexOf("TargetFilename");
+  const colIndex = header.indexOf("Targetfilename");
 
   if (colIndex === -1) {
     alert("Column 'TargetFilename' not found.");
